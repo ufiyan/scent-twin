@@ -1,5 +1,5 @@
 import React from 'react';
-import { GENE_QUESTIONS } from '../data/geneProfiles';
+import { GENE_QUESTIONS, getQuizProgressLabel } from '../data/geneProfiles';
 
 export default function GeneticQuiz({ answers, onChange }) {
   return (
@@ -8,9 +8,12 @@ export default function GeneticQuiz({ answers, onChange }) {
         <div key={question.id} className="space-y-3">
           <div className="space-y-1">
             <div className="text-[11px] uppercase tracking-wider text-[#D4A847] font-medium">
-              Gene probe {index + 1} · {question.gene}
+              {getQuizProgressLabel(index)}
             </div>
-            <div className="text-base">{question.question}</div>
+            <div className="text-base leading-relaxed">{question.question}</div>
+            {question.hint && (
+              <div className="text-xs text-[#8C8A84] italic">{question.hint}</div>
+            )}
           </div>
           <div className="space-y-2">
             {question.options.map(option => (
